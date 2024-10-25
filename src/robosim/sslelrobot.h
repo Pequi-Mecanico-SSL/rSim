@@ -16,17 +16,17 @@ Copyright (C) 2011, Parsian Robotic Center (eew.aut.ac.ir/~parsian/grsim)
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SSLROBOT_H
-#define SSLROBOT_H
+#ifndef SSLELROBOT_H
+#define SSLELROBOT_H
 
 #include "physics/pworld.h"
 #include "physics/pcylinder.h"
 #include "physics/pbox.h"
 #include "physics/pball.h"
-#include "sslconfig.h"
+#include "sslelconfig.h"
 #include "kickstatus.h"
 
-class SSLRobot
+class SSLELRobot
 {
     PWorld *physics;
     PBall *ball;
@@ -42,14 +42,14 @@ public:
     {
     public:
         int id;
-        Wheel(SSLRobot *robot, int _id, dReal ang, dReal ang2);
+        Wheel(SSLELRobot *robot, int _id, dReal ang, dReal ang2);
         ~Wheel();
         void step();
         dJointID joint;
         dJointID motor;
         PCylinder *cyl;
         dReal desiredAngularSpeed, maxAngularSpeed; // rad/s
-        SSLRobot *rob;
+        SSLELRobot *rob;
     } * wheels[4]{};
     class Kicker
     {
@@ -59,7 +59,7 @@ public:
         int kickerCounter;
         bool holdingBall;
       public:
-        Kicker(SSLRobot* robot);
+        Kicker(SSLELRobot* robot);
         ~Kicker();
         void step();
         void kick(dReal kickSpeedX, dReal kickSpeedZ);
@@ -73,12 +73,12 @@ public:
         dJointID joint;
         dJointID robot_to_ball;
         PBox* box;
-        SSLRobot* rob;
+        SSLELRobot* rob;
     } *kicker;
 
-    SSLRobot(PWorld *world, PBall *ball, dReal x, dReal y, dReal z,
+    SSLELRobot(PWorld *world, PBall *ball, dReal x, dReal y, dReal z,
            int robot_id, dReal dir);
-    ~SSLRobot();
+    ~SSLELRobot();
     void step();
     void setDesiredSpeedLocal(dReal vx, dReal vy, dReal vw);
     void setWheelDesiredAngularSpeed(int i, dReal s); //i = 0,1,2,3
@@ -95,6 +95,6 @@ public:
     PWorld *getWorld();
 };
 
-#define SSL_ROBOT_START_Z() (SSLConfig::Robot().getHeight() * 0.5 + SSLConfig::Robot().getBottomHeight())
+#define SSLEL_ROBOT_START_Z() (SSLELConfig::Robot().getHeight() * 0.5 + SSLELConfig::Robot().getBottomHeight())
 
-#endif // SSLROBOT_H
+#endif // SSLELROBOT_H
